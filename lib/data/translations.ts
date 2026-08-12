@@ -86,6 +86,7 @@ export interface TranslationSchema {
     timings: string;
     experience: string;
     testimonials: string;
+    facilities: string;
   };
 }
 
@@ -177,7 +178,8 @@ export const translations: Record<'en' | 'ta', TranslationSchema> = {
       email: "[Email Address - Content Pending Client Verification]",
       timings: "[Consultation Timings - Content Pending Client Verification]",
       experience: "[Doctor Experience - Content Pending Client Verification]",
-      testimonials: "[Verified patient testimonial - Content Pending Client Verification]"
+      testimonials: "[Verified patient testimonial - Content Pending Client Verification]",
+      facilities: "[Facilities Content - Content Pending Client Verification]"
     }
   },
   ta: {
@@ -267,7 +269,8 @@ export const translations: Record<'en' | 'ta', TranslationSchema> = {
       email: "[மின்னஞ்சல் முகவரி - கிளையன்ட் சரிபார்ப்பு நிலுவையில் உள்ளது]",
       timings: "[ஆலோசனை நேரங்கள் - கிளையன்ட் சரிபார்ப்பு நிலுவையில் உள்ளது]",
       experience: "[மருத்துவர் அனுபவம் - கிளையன்ட் சரிபார்ப்பு நிலுவையில் உள்ளது]",
-      testimonials: "[சரிபார்க்கப்பட்ட நோயாளியின் கருத்து - கிளையன்ட் சரிபார்ப்பு நிலுவையில் உள்ளது]"
+      testimonials: "[சரிபார்க்கப்பட்ட நோயாளியின் கருத்து - கிளையன்ட் சரிபார்ப்பு நிலுவையில் உள்ளது]",
+      facilities: "[சிகிச்சை வசதிகள் - கிளையன்ட் சரிபார்ப்பு நிலுவையில் உள்ளது]"
     }
   }
 };
