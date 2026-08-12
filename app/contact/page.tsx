@@ -14,7 +14,7 @@ export default function ContactPage() {
   const directionsUrl = "https://maps.google.com";
 
   return (
-    <div className="w-full py-16 bg-white dark:bg-background smooth-transition">
+    <div className="w-full pt-32 pb-16 sm:pt-36 bg-white dark:bg-background smooth-transition">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Page Header */}
@@ -139,7 +139,7 @@ export default function ContactPage() {
               </div>
               
               <div className="relative w-full aspect-video bg-gradient-to-br from-primary-light to-bg-secondary dark:from-primary-light/10 dark:to-bg-secondary/20 flex flex-col items-center justify-center p-6 text-center select-none">
-                <div className="absolute inset-0 z-0 opacity-15 pointer-events-none bg-[radial-gradient(#0F8A5F_1px,transparent_1px)] [background-size:16px_16px]" />
+                <div className="absolute inset-0 z-0 opacity-15 pointer-events-none bg-[radial-gradient(#142DA6_1px,transparent_1px)] [background-size:16px_16px]" />
                 
                 <div className="relative z-10 space-y-4">
                   <div className="p-3 bg-white dark:bg-background rounded-full shadow-md w-fit mx-auto border border-border-color">

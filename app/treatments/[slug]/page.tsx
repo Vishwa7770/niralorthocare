@@ -43,7 +43,7 @@ export default function TreatmentDetailPage() {
   };
 
   return (
-    <div className="w-full py-12 bg-white dark:bg-background smooth-transition">
+    <div className="w-full pt-28 pb-12 sm:pt-32 bg-white dark:bg-background smooth-transition">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Back Link & Breadcrumbs */}
@@ -154,11 +154,6 @@ export default function TreatmentDetailPage() {
               </div>
             )}
 
-            {/* Verification Disclaimer */}
-            <div className="text-[10px] text-text-secondary/70 italic border-t border-border-color/40 pt-4 leading-relaxed">
-              Disclaimer: The diagnostic details, symptoms, and treatment paths for {treatment.title} outlined above are placeholders. The client must supply official, medically vetted case papers and treatment descriptions before publication.
-            </div>
-
           </div>
 
           {/* Right Column: Sidebar Actions */}
@@ -201,12 +196,6 @@ export default function TreatmentDetailPage() {
                   <MessageSquare className="w-4.5 h-4.5 text-[#25D366]" />
                   <span>WhatsApp Enquiry</span>
                 </a>
-              </div>
-
-              {/* Verified Badge */}
-              <div className="border-t border-border-color/60 pt-4 flex items-center justify-center gap-2 text-[11px] font-semibold text-text-secondary">
-                <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
-                <span>Client Content Verification Required</span>
               </div>
             </div>
 

@@ -38,7 +38,7 @@ const StylizedJointModel: React.FC<{ reducedMotion: boolean }> = ({ reducedMotio
       <mesh position={[0, 1.1, 0]}>
         <cylinderGeometry args={[0.22, 0.28, 1.8, 16]} />
         <meshPhysicalMaterial
-          color="#E8F7F0"
+          color="#E9EDFB"
           roughness={0.15}
           metalness={0.1}
           clearcoat={0.8}
@@ -50,7 +50,7 @@ const StylizedJointModel: React.FC<{ reducedMotion: boolean }> = ({ reducedMotio
       <mesh position={[0, 0.25, 0]}>
         <sphereGeometry args={[0.38, 16, 16]} />
         <meshPhysicalMaterial
-          color="#0F8A5F"
+          color="#142DA6"
           roughness={0.2}
           metalness={0.3}
           clearcoat={0.5}
@@ -61,7 +61,7 @@ const StylizedJointModel: React.FC<{ reducedMotion: boolean }> = ({ reducedMotio
       <mesh position={[0, 0, 0]}>
         <sphereGeometry args={[0.25, 16, 16]} />
         <meshBasicMaterial
-          color="#19A974"
+          color="#3454D1"
         />
       </mesh>
 
@@ -69,7 +69,7 @@ const StylizedJointModel: React.FC<{ reducedMotion: boolean }> = ({ reducedMotio
       <mesh position={[0, -0.25, 0]}>
         <sphereGeometry args={[0.38, 16, 16]} />
         <meshPhysicalMaterial
-          color="#0F8A5F"
+          color="#142DA6"
           roughness={0.2}
           metalness={0.3}
           clearcoat={0.5}
@@ -80,7 +80,7 @@ const StylizedJointModel: React.FC<{ reducedMotion: boolean }> = ({ reducedMotio
       <mesh position={[0, -1.1, 0]}>
         <cylinderGeometry args={[0.28, 0.20, 1.8, 16]} />
         <meshPhysicalMaterial
-          color="#E8F7F0"
+          color="#E9EDFB"
           roughness={0.15}
           metalness={0.1}
           clearcoat={0.8}
@@ -92,8 +92,8 @@ const StylizedJointModel: React.FC<{ reducedMotion: boolean }> = ({ reducedMotio
       <mesh position={[0, 0, 0]} rotation={[0.4, 0.2, 0.5]}>
         <torusGeometry args={[0.46, 0.06, 8, 24]} />
         <meshStandardMaterial
-          color="#19A974"
-          emissive="#19A974"
+          color="#3454D1"
+          emissive="#3454D1"
           emissiveIntensity={0.6}
           roughness={0.2}
         />
@@ -102,8 +102,8 @@ const StylizedJointModel: React.FC<{ reducedMotion: boolean }> = ({ reducedMotio
       <mesh position={[0, 0, 0]} rotation={[-0.4, -0.2, -0.5]}>
         <torusGeometry args={[0.46, 0.06, 8, 24]} />
         <meshStandardMaterial
-          color="#19A974"
-          emissive="#0F8A5F"
+          color="#3454D1"
+          emissive="#142DA6"
           emissiveIntensity={0.5}
           roughness={0.2}
         />
@@ -113,7 +113,7 @@ const StylizedJointModel: React.FC<{ reducedMotion: boolean }> = ({ reducedMotio
       <mesh position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]}>
         <torusGeometry args={[1.1, 0.015, 4, 32]} />
         <meshBasicMaterial
-          color="#076B4A"
+          color="#0A1F7A"
           transparent
           opacity={0.35}
           wireframe
@@ -123,7 +123,7 @@ const StylizedJointModel: React.FC<{ reducedMotion: boolean }> = ({ reducedMotio
       <mesh position={[0, 0, 0]} rotation={[Math.PI / 4, Math.PI / 4, 0]}>
         <torusGeometry args={[1.3, 0.01, 4, 32]} />
         <meshBasicMaterial
-          color="#19A974"
+          color="#3454D1"
           transparent
           opacity={0.2}
           wireframe
@@ -176,7 +176,7 @@ export const JointVisual3D: React.FC = () => {
     <div className="w-full aspect-square relative select-none rounded-2xl overflow-hidden bg-gradient-to-br from-primary-light/10 to-transparent dark:from-primary-light/5 dark:to-transparent border border-border-color/30">
       
       {/* Subtle Grid backdrop overlay */}
-      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#0F8A5F_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
+      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#142DA6_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
 
       <Suspense fallback={<JointVisualFallback />}>
         <Canvas
@@ -189,10 +189,10 @@ export const JointVisual3D: React.FC = () => {
           <ambientLight intensity={0.65} />
           
           <directionalLight position={[5, 8, 5]} intensity={1.5} color="#ffffff" />
-          <directionalLight position={[-5, -5, -2]} intensity={0.5} color="#E8F7F0" />
+          <directionalLight position={[-5, -5, -2]} intensity={0.5} color="#E9EDFB" />
           
           {/* Internal joint point glow */}
-          <pointLight position={[0, 0, 0]} intensity={1.2} distance={2.5} color="#19A974" />
+          <pointLight position={[0, 0, 0]} intensity={1.2} distance={2.5} color="#3454D1" />
           
           {/* Stylized Joint Model */}
           <StylizedJointModel reducedMotion={reducedMotion} />
@@ -203,7 +203,7 @@ export const JointVisual3D: React.FC = () => {
             scale={2.5}
             size={2}
             speed={reducedMotion ? 0 : 0.4}
-            color="#19A974"
+            color="#3454D1"
             opacity={0.6}
           />
 

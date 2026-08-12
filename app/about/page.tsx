@@ -1,15 +1,15 @@
 "use client";
 
 import React from "react";
-import { Award, GraduationCap, ClipboardList, ShieldAlert, HeartPulse, User } from "lucide-react";
+import Image from "next/image";
+import { GraduationCap, ClipboardList, HeartPulse } from "lucide-react";
 import { useLanguage } from "@/components/ui/LanguageContext";
-import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
 
 export default function AboutPage() {
   const { t } = useLanguage();
 
   return (
-    <div className="w-full py-16 bg-white dark:bg-background smooth-transition">
+    <div className="w-full pt-32 pb-16 sm:pt-36 bg-white dark:bg-background smooth-transition">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Page Header */}
@@ -31,12 +31,16 @@ export default function AboutPage() {
           <div className="lg:col-span-5 relative">
             <div className="max-w-sm mx-auto lg:max-w-none">
               <div className="absolute -inset-4 bg-primary/10 rounded-2xl -rotate-2 pointer-events-none" />
-              <ImagePlaceholder 
-                text="Dr. V.D.N. Madhivanan Portrait - M.B.B.S., M.S. (Ortho)"
-                aspectRatio="aspect-[3/4]"
-                iconType="doctor"
-                className="shadow-md border border-border-color"
-              />
+              <div className="relative aspect-[3/4] rounded-xl overflow-hidden shadow-md border border-border-color">
+                <Image
+                  src="/images/doctor-portrait.jpg"
+                  alt="Dr. V.D.N. Madhivanan - M.B.B.S., M.S. (Ortho)"
+                  fill
+                  sizes="(max-width: 1024px) 90vw, 40vw"
+                  className="object-cover"
+                  priority
+                />
+              </div>
             </div>
           </div>
 
@@ -60,17 +64,6 @@ export default function AboutPage() {
               </p>
               <p className="text-base text-text-secondary leading-relaxed">
                 Our practice is centered on providing personalized orthopedics. We focus on conservative, non-surgical management when possible, resorting to precise surgical interventions only when they offer the most effective path to recovery.
-              </p>
-            </div>
-
-            {/* Timings / Location Disclaimer Card */}
-            <div className="bg-bg-secondary dark:bg-card-bg/40 p-5 rounded-xl border border-border-color/85 space-y-2">
-              <h4 className="text-sm font-bold text-primary dark:text-primary-accent flex items-center gap-2">
-                <ShieldAlert className="w-4 h-4" />
-                <span>Verification Warning</span>
-              </h4>
-              <p className="text-xs text-text-secondary leading-relaxed">
-                Specific clinical details such as clinical hours, registration records, patient consult limits, and affiliations require verified documentation from Niral Ortho Care before final publication. Current data uses verified placeholders.
               </p>
             </div>
           </div>
@@ -159,6 +152,27 @@ export default function AboutPage() {
             </ul>
           </div>
 
+        </div>
+
+        {/* Community Engagement Photo */}
+        <div className="pt-16 mt-16 border-t border-border-color">
+          <div className="text-center max-w-2xl mx-auto mb-8 space-y-2">
+            <span className="text-xs font-bold uppercase tracking-widest text-primary dark:text-primary-accent">
+              Community Presence
+            </span>
+            <h3 className="text-2xl font-extrabold text-foreground tracking-tight">
+              Actively Engaged With Our Community
+            </h3>
+          </div>
+          <div className="relative w-full max-w-4xl mx-auto aspect-video rounded-xl overflow-hidden shadow-md border border-border-color">
+            <Image
+              src="/images/doctor-event.jpg"
+              alt="Dr. V.D.N. Madhivanan being honored at a community event"
+              fill
+              sizes="(max-width: 1024px) 100vw, 900px"
+              className="object-cover"
+            />
+          </div>
         </div>
 
       </div>

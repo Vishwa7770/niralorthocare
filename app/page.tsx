@@ -2,28 +2,12 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import dynamic from "next/dynamic";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Activity, Sparkles, ShieldAlert, Flame, HeartPulse, GitMerge, Shuffle, TrendingUp, ShieldCheck, CheckCircle2, ChevronRight, MessageSquare, Star, Phone } from "lucide-react";
+import { ArrowRight, Activity, Sparkles, ShieldAlert, Flame, HeartPulse, GitMerge, Shuffle, TrendingUp, ShieldCheck, CheckCircle2, ChevronRight, MessageSquare, Star, Phone, HelpCircle, ChevronDown, ChevronUp } from "lucide-react";
 import { useLanguage } from "@/components/ui/LanguageContext";
-import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
 import { treatmentsData } from "@/lib/data/treatmentsData";
 import { VideoWelcomeScreen } from "@/components/ui/VideoWelcomeScreen";
-
-const HeroBackground3D = dynamic(
-  () => import("@/components/ui/HeroBackground3D"),
-  {
-    ssr: false,
-    loading: () => (
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none z-0"
-        style={{
-          backgroundImage: "url('/images/hero-bg.jpg')"
-        }}
-      />
-    )
-  }
-);
 
 // Helper to resolve Lucide Icons dynamically
 const getIconComponent = (name: string) => {
@@ -47,6 +31,7 @@ export default function Home() {
   const [scrollY, setScrollY] = useState(0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [showIntro, setShowIntro] = useState(true);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
   // Disable scroll while welcome intro is playing
   useEffect(() => {
@@ -88,6 +73,22 @@ export default function Home() {
   // Extract top treatments to show on homepage
   const homeTreatments = (treatmentsData[language] || []).slice(0, 6);
 
+  // Snapshot of the most common questions, mirrored from the full FAQ page
+  const homeFaqs = [
+    {
+      question: "How can I book an appointment with Dr. V.D.N. Madhivanan?",
+      answer: `You can easily request a consultation by clicking the "Book Appointment" button on the navigation bar, filling out the online request form, or calling the hospital clinic line directly. Our clinical staff will call you to confirm your date and slot.`
+    },
+    {
+      question: "What conditions are treated at Niral Ortho Care?",
+      answer: "We specialize in a broad range of orthopedic care, including Knee Care (arthritis, ligament wear), Joint Care, Fracture Alignment Care (splints/fixations), Sports Injuries (ACL tears, sprains), Spine Care (back pain, sciatica), and post-operative Physical Rehabilitation."
+    },
+    {
+      question: "Does the clinic offer emergency fracture services?",
+      answer: "Emergency orthopedic fixations are subject to surgeon availability. Please contact us directly to check emergency trauma triage status before arrival."
+    }
+  ];
+
   // Framer Motion Animation Variants
   const fadeInUp = {
     initial: { opacity: 0, y: 30 },
@@ -111,13 +112,10 @@ export default function Home() {
       </AnimatePresence>
 
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-[92vh] flex items-center justify-center bg-[#06110D] text-white overflow-hidden py-24">
-        {/* Layer 1: Background image with 3D liquid wave displacement texture rendering */}
-        <HeroBackground3D />
-
-        {/* Layer 2: Sophisticated dark gradient & green glows */}
-        <div className="absolute inset-0 bg-black/65 lg:bg-gradient-to-r lg:from-[#06110D]/95 lg:via-[#06110D]/50 lg:to-transparent z-1 pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_35%,rgba(25,169,116,0.15)_0%,transparent_60%)] z-1 pointer-events-none" />
+      <section className="relative min-h-[92vh] flex items-center justify-center bg-white text-foreground overflow-hidden pt-32 pb-16 sm:pt-36">
+        {/* Soft brand-blue accents to keep the white hero feeling premium rather than flat */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(52,84,209,0.08)_0%,transparent_55%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_80%,rgba(20,45,166,0.06)_0%,transparent_55%)] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -129,7 +127,7 @@ export default function Home() {
               variants={staggerContainer}
             >
               <motion.div 
-                className="text-xs font-bold text-[#19A974] flex items-center gap-1.5"
+                className="text-xs font-bold text-primary dark:text-primary-accent flex items-center gap-1.5"
                 variants={fadeInUp}
               >
                 <span>—</span>
@@ -137,16 +135,16 @@ export default function Home() {
               </motion.div>
 
               <motion.h1 
-                className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] text-white"
+                className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] text-foreground"
                 variants={fadeInUp}
               >
                 Expert <br />
-                <span className="text-[#19A974]">Orthopedic Care</span> <br />
+                <span className="text-primary dark:text-primary-accent">Orthopedic Care</span> <br />
                 Designed Around You.
               </motion.h1>
 
               <motion.p 
-                className="text-base sm:text-lg text-zinc-300 max-w-xl leading-relaxed font-medium"
+                className="text-base sm:text-lg text-text-secondary max-w-xl leading-relaxed font-medium"
                 variants={fadeInUp}
               >
                 Personalized treatment. Advanced care. <br />
@@ -159,16 +157,16 @@ export default function Home() {
               >
                 <Link
                   href="/appointment"
-                  className="w-full sm:w-auto px-8 py-3.5 bg-primary hover:bg-[#076B4A] text-white text-base font-bold rounded-lg shadow-sm hover:shadow-md transition-all text-center flex items-center justify-center gap-2 group"
+                  className="w-full sm:w-auto px-8 py-3.5 bg-primary hover:bg-[#0A1F7A] text-white text-base font-bold rounded-lg shadow-sm hover:shadow-md transition-all text-center flex items-center justify-center gap-2 group"
                 >
                   <span>Book an Appointment</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link
                   href="/contact"
-                  className="w-full sm:w-auto px-8 py-3.5 border border-white/20 hover:border-white hover:bg-white/10 bg-transparent text-white text-base font-bold rounded-lg transition-all text-center flex items-center justify-center gap-2"
+                  className="w-full sm:w-auto px-8 py-3.5 border border-border-color hover:border-primary hover:bg-primary-light/20 dark:hover:bg-primary-light/10 bg-transparent text-foreground text-base font-bold rounded-lg transition-all text-center flex items-center justify-center gap-2"
                 >
-                  <Phone className="w-4 h-4 text-white" />
+                  <Phone className="w-4 h-4 text-primary dark:text-primary-accent" />
                   <span>Contact Us</span>
                 </Link>
               </motion.div>
@@ -180,26 +178,26 @@ export default function Home() {
               >
                 <div className="flex -space-x-3">
                   {[1, 2, 3, 4].map((i) => (
-                    <div key={i} className="w-10 h-10 rounded-full border-2 border-[#06110D] overflow-hidden bg-zinc-800 flex items-center justify-center text-[10px] font-bold text-zinc-400 select-none">
+                    <div key={i} className="w-10 h-10 rounded-full border-2 border-white dark:border-background overflow-hidden bg-bg-secondary flex items-center justify-center text-[10px] font-bold text-text-secondary select-none shadow-sm">
                       P{i}
                     </div>
                   ))}
-                  <div className="w-10 h-10 rounded-full border-2 border-[#06110D] bg-[#0F8A5F] flex items-center justify-center text-xs font-bold text-white z-10 select-none">
+                  <div className="w-10 h-10 rounded-full border-2 border-white dark:border-background bg-primary flex items-center justify-center text-xs font-bold text-white z-10 select-none shadow-sm">
                     +98
                   </div>
                 </div>
                 <div className="flex flex-col gap-0.5">
                   <div className="flex items-center gap-0.5">
                     {[1, 2, 3, 4, 5].map((s) => (
-                      <Star key={s} className="w-4 h-4 fill-[#19A974] text-[#19A974]" />
+                      <Star key={s} className="w-4 h-4 fill-primary text-primary dark:fill-primary-accent dark:text-primary-accent" />
                     ))}
                   </div>
-                  <span className="text-xs font-semibold text-zinc-400">Trusted by 100+ Patients</span>
+                  <span className="text-xs font-semibold text-text-secondary">Trusted by 100+ Patients</span>
                 </div>
               </motion.div>
             </motion.div>
 
-            {/* Hero Right: Stacked Glass List Cards */}
+            {/* Hero Right: Stacked Feature Cards */}
             <motion.div 
               className="lg:col-span-5 relative w-full flex flex-col gap-4 pt-8 lg:pt-0"
               initial={{ opacity: 0, scale: 0.95 }}
@@ -207,35 +205,24 @@ export default function Home() {
             >
               <div className="space-y-4 w-full max-w-md lg:max-w-none ml-auto relative z-20">
                 {/* Card 1 */}
-                <div className="bg-black/35 backdrop-blur-md border border-white/10 rounded-xl p-5 flex items-start gap-4 hover:border-white/20 transition-colors">
-                  <div className="p-3 bg-[#E8F7F0]/10 text-[#19A974] rounded-lg shrink-0">
+                <div className="bg-bg-secondary dark:bg-card-bg/40 border border-border-color rounded-xl p-5 flex items-start gap-4 hover:border-primary/40 hover:shadow-md transition-all">
+                  <div className="p-3 bg-primary-light dark:bg-primary-light/10 text-primary dark:text-primary-accent rounded-lg shrink-0">
                     <ShieldCheck className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="text-white font-bold text-base leading-tight">Expert Care</h4>
-                    <p className="text-zinc-400 text-xs mt-1 font-medium">Experienced orthopedic specialist</p>
+                    <h4 className="text-foreground font-bold text-base leading-tight">Expert Care</h4>
+                    <p className="text-text-secondary text-xs mt-1 font-medium">Experienced orthopedic specialist</p>
                   </div>
                 </div>
 
                 {/* Card 2 */}
-                <div className="bg-black/35 backdrop-blur-md border border-white/10 rounded-xl p-5 flex items-start gap-4 hover:border-white/20 transition-colors">
-                  <div className="p-3 bg-[#E8F7F0]/10 text-[#19A974] rounded-lg shrink-0">
+                <div className="bg-bg-secondary dark:bg-card-bg/40 border border-border-color rounded-xl p-5 flex items-start gap-4 hover:border-primary/40 hover:shadow-md transition-all">
+                  <div className="p-3 bg-primary-light dark:bg-primary-light/10 text-primary dark:text-primary-accent rounded-lg shrink-0">
                     <Activity className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="text-white font-bold text-base leading-tight">Personalized Care</h4>
-                    <p className="text-zinc-400 text-xs mt-1 font-medium">Treatment tailored to your unique needs</p>
-                  </div>
-                </div>
-
-                {/* Card 3 */}
-                <div className="bg-black/35 backdrop-blur-md border border-white/10 rounded-xl p-5 flex items-start gap-4 hover:border-white/20 transition-colors">
-                  <div className="p-3 bg-[#E8F7F0]/10 text-[#19A974] rounded-lg shrink-0">
-                    <HeartPulse className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h4 className="text-white font-bold text-base leading-tight">Advanced Facilities</h4>
-                    <p className="text-zinc-400 text-xs mt-1 font-medium">Modern technology for better outcomes</p>
+                    <h4 className="text-foreground font-bold text-base leading-tight">Personalized Care</h4>
+                    <p className="text-text-secondary text-xs mt-1 font-medium">Treatment tailored to your unique needs</p>
                   </div>
                 </div>
               </div>
@@ -245,14 +232,14 @@ export default function Home() {
 
         {/* Scroll down indicator */}
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1 opacity-80 pointer-events-none">
-          <div className="w-5 h-8 border-2 border-zinc-500 rounded-full flex justify-center p-1">
+          <div className="w-5 h-8 border-2 border-border-color rounded-full flex justify-center p-1">
             <motion.div 
-              className="w-1 h-2 bg-primary-accent rounded-full"
+              className="w-1 h-2 bg-primary rounded-full"
               animate={{ y: [0, 8, 0] }}
               transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
             />
           </div>
-          <span className="text-[9px] font-bold tracking-widest uppercase text-zinc-400">Scroll Down</span>
+          <span className="text-[9px] font-bold tracking-widest uppercase text-text-secondary">Scroll Down</span>
         </div>
       </section>
 
@@ -310,12 +297,16 @@ export default function Home() {
             <div className="lg:col-span-5">
               <div className="relative max-w-sm mx-auto lg:max-w-none">
                 <div className="absolute -inset-4 bg-primary/10 rounded-2xl rotate-3 pointer-events-none" />
-                <ImagePlaceholder 
-                  text="Dr. V.D.N. Madhivanan Clinical Consultation Pose"
-                  aspectRatio="aspect-[4/5]"
-                  iconType="doctor"
-                  className="shadow-md border border-border-color"
-                />
+                <div className="relative aspect-[4/5] rounded-xl overflow-hidden shadow-md border border-border-color">
+                  <Image
+                    src="/images/doctor-portrait.jpg"
+                    alt="Dr. V.D.N. Madhivanan"
+                    fill
+                    sizes="(max-width: 1024px) 90vw, 40vw"
+                    className="object-cover"
+                    priority
+                  />
+                </div>
               </div>
             </div>
 
@@ -482,7 +473,64 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6. CALL-TO-ACTION AREA */}
+      {/* 6. FAQ TEASER SECTION */}
+      <section className="py-20 bg-bg-secondary dark:bg-bg-secondary/40 border-y border-border-color smooth-transition">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
+            <span className="text-xs font-bold uppercase tracking-widest text-primary dark:text-primary-accent">
+              Support Center
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-sm text-text-secondary">
+              Quick answers about appointments, timings, and the conditions we treat.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {homeFaqs.map((faq, index) => {
+              const isOpen = openFaqIndex === index;
+              return (
+                <div
+                  key={index}
+                  className="border border-border-color rounded-xl overflow-hidden bg-white dark:bg-card-bg/20 smooth-transition"
+                >
+                  <button
+                    onClick={() => setOpenFaqIndex(isOpen ? null : index)}
+                    className="w-full flex items-center justify-between p-5 text-left font-bold text-sm sm:text-base text-foreground hover:bg-primary-light/20 dark:hover:bg-primary-light/5 smooth-transition gap-4"
+                    aria-expanded={isOpen}
+                  >
+                    <span className="flex items-center gap-3">
+                      <HelpCircle className="w-5 h-5 text-primary dark:text-primary-accent shrink-0" />
+                      <span>{faq.question}</span>
+                    </span>
+                    {isOpen ? <ChevronUp className="w-5 h-5 text-primary shrink-0" /> : <ChevronDown className="w-5 h-5 text-text-secondary shrink-0" />}
+                  </button>
+
+                  {isOpen && (
+                    <div className="px-5 pb-5 text-sm text-text-secondary leading-relaxed border-t border-border-color/30 pt-4 bg-bg-secondary/50 dark:bg-card-bg">
+                      {faq.answer}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="text-center mt-10">
+            <Link
+              href="/faq"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-border-color hover:bg-white dark:hover:bg-card-bg text-sm font-bold rounded-lg transition-all"
+            >
+              <span>View All FAQs</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. CALL-TO-ACTION AREA */}
       <section className="py-16 bg-primary dark:bg-bg-secondary border-t border-primary-dark/10 smooth-transition">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
           <h2 className="text-3xl font-extrabold text-white tracking-tight">

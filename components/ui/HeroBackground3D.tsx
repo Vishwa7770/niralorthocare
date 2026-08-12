@@ -165,12 +165,15 @@ export const HeroBackground3D: React.FC = () => {
 
   // Static Fallback CSS Layout
   const staticFallback = (
-    <div 
-      className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none z-0"
-      style={{
-        backgroundImage: "url('/images/hero-bg.jpg')"
-      }}
-    />
+    <div className="absolute inset-0 bg-[#060B1D] pointer-events-none z-0 overflow-hidden">
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: "url('/images/hero-bg.jpg')"
+        }}
+      />
+      <div className="absolute inset-0 bg-[#142DA6] mix-blend-color opacity-60" />
+    </div>
   );
 
   if (webGlSupported === null) {
@@ -182,7 +185,7 @@ export const HeroBackground3D: React.FC = () => {
   }
 
   return (
-    <div className="absolute inset-0 w-full h-full bg-[#06110D] overflow-hidden pointer-events-none z-0">
+    <div className="absolute inset-0 w-full h-full bg-[#060B1D] overflow-hidden pointer-events-none z-0">
       <Suspense fallback={staticFallback}>
         <Canvas
           camera={{ position: [0, 0, 1.5], fov: 60 }}
@@ -193,9 +196,12 @@ export const HeroBackground3D: React.FC = () => {
           <ImagePlane reducedMotion={reducedMotion} />
         </Canvas>
       </Suspense>
-      
+
+      {/* Brand color-shift wash: pulls the source image's teal cast toward the logo's navy blue */}
+      <div className="absolute inset-0 bg-[#142DA6] mix-blend-color opacity-60 pointer-events-none z-[5]" />
+
       {/* Vignette overlay */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,#020605_95%)] pointer-events-none z-10" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,#04060F_95%)] pointer-events-none z-10" />
     </div>
   );
 };

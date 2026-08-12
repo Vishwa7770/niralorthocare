@@ -3,6 +3,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+// Speed the intro video up from its native (slow) pace. 1 = normal, 1.8 = fast.
+const PLAYBACK_RATE = 1.8;
+
 interface VideoWelcomeScreenProps {
   onComplete: () => void;
 }
@@ -13,7 +16,7 @@ export const VideoWelcomeScreen: React.FC<VideoWelcomeScreenProps> = ({ onComple
   const [showAnimation, setShowAnimation] = useState(false);
   const [showText, setShowText] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  
+
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -38,6 +41,13 @@ export const VideoWelcomeScreen: React.FC<VideoWelcomeScreenProps> = ({ onComple
       return () => clearTimeout(timer);
     }
   }, [onComplete]);
+
+  const handleLoadedMetadata = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    // Video source plays back slowly by default — speed it up to a medium-fast pace.
+    video.playbackRate = PLAYBACK_RATE;
+  };
 
   const handleTimeUpdate = () => {
     const video = videoRef.current;
@@ -74,7 +84,7 @@ export const VideoWelcomeScreen: React.FC<VideoWelcomeScreenProps> = ({ onComple
   // Render simplified text fade-in if prefers-reduced-motion is true
   if (reducedMotion) {
     return (
-      <div className="fixed inset-0 z-50 bg-[#020605] flex flex-col items-center justify-center text-white text-center px-4">
+      <div className="fixed inset-0 z-50 bg-[#05070F] flex flex-col items-center justify-center text-white text-center px-4">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: [0, 1, 1, 0] }}
@@ -83,7 +93,7 @@ export const VideoWelcomeScreen: React.FC<VideoWelcomeScreenProps> = ({ onComple
         >
           <span className="text-xs font-bold tracking-widest text-zinc-400 uppercase">Welcome to</span>
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
-            NIRAL <span className="text-[#0F8A5F]">ORTHO CARE</span>
+            NIRAL <span className="text-[#142DA6]">ORTHO CARE</span>
           </h2>
         </motion.div>
       </div>
@@ -93,7 +103,7 @@ export const VideoWelcomeScreen: React.FC<VideoWelcomeScreenProps> = ({ onComple
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 z-50 bg-[#020605] flex items-center justify-center overflow-hidden select-none"
+        className="fixed inset-0 z-50 bg-[#05070F] flex items-center justify-center overflow-hidden select-none"
         initial={{ opacity: 1 }}
         animate={{ 
           opacity: isTransitioning ? 0 : 1,
@@ -109,21 +119,16 @@ export const VideoWelcomeScreen: React.FC<VideoWelcomeScreenProps> = ({ onComple
           muted
           playsInline
           controls={false}
+          disablePictureInPicture
+          disableRemotePlayback
+          onLoadedMetadata={handleLoadedMetadata}
           onTimeUpdate={handleTimeUpdate}
           onEnded={handleVideoEnded}
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0"
+          className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none [&::-webkit-media-controls]:hidden"
         />
 
         {/* Cinematic Vignette Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#020605]/95 via-transparent to-[#020605]/95 pointer-events-none z-10" />
-
-        {/* Skip Intro Button */}
-        <button
-          onClick={handleSkip}
-          className="absolute top-6 right-6 z-30 px-4 py-2 border border-white/20 hover:border-white hover:bg-white/10 text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-all"
-        >
-          Skip Intro
-        </button>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#05070F]/95 via-transparent to-[#05070F]/95 pointer-events-none z-10" />
 
         {/* Elegant typography overlay (reveals at final part of video) */}
         <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4 pointer-events-none">
@@ -148,7 +153,7 @@ export const VideoWelcomeScreen: React.FC<VideoWelcomeScreenProps> = ({ onComple
                   <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-none">
                     NIRAL
                   </h2>
-                  <span className="text-base sm:text-lg font-bold text-[#0F8A5F] tracking-[0.3em] uppercase mt-1 leading-none">
+                  <span className="text-base sm:text-lg font-bold text-[#142DA6] tracking-[0.3em] uppercase mt-1 leading-none">
                     ORTHO CARE
                   </span>
                 </motion.div>

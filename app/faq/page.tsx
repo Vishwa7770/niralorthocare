@@ -42,7 +42,7 @@ export default function FaqPage() {
   };
 
   return (
-    <div className="w-full py-16 bg-white dark:bg-background smooth-transition">
+    <div className="w-full pt-32 pb-16 sm:pt-36 bg-white dark:bg-background smooth-transition">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Page Header */}

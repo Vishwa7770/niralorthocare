@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, Sun, Moon, Globe, HeartPulse, Phone, Calendar } from "lucide-react";
+import { Menu, X, Sun, Moon, Globe, Phone, Calendar } from "lucide-react";
 import { useTheme } from "@/components/ui/ThemeContext";
 import { useLanguage } from "@/components/ui/LanguageContext";
 
@@ -38,23 +39,13 @@ export const Navbar: React.FC = () => {
     { name: t.nav.home, path: "/" },
     { name: t.nav.about, path: "/about" },
     { name: t.nav.treatments, path: "/treatments" },
-    { name: t.nav.facilities, path: "/facilities" },
-    { name: t.nav.gallery, path: "/gallery" },
-    { name: t.nav.faq, path: "/faq" },
     { name: t.nav.contact, path: "/contact" }
   ];
 
   const isHome = pathname === "/";
-  const isTopHome = isHome && !isScrolled;
-  const navbarBg = isScrolled 
-    ? "bg-white/95 dark:bg-background/95 shadow-md border-b border-border-color backdrop-blur-md py-3" 
-    : isHome 
-      ? "bg-transparent py-5 border-b border-transparent" 
-      : "bg-white dark:bg-background border-b border-border-color py-4";
-
-  const textColor = isScrolled || !isHome
-    ? "text-foreground"
-    : "text-white"; // or text-white depending on hero contrast, but let's make it adapt
+  const navbarBg = isScrolled
+    ? "bg-white/95 dark:bg-background/95 shadow-md border-b border-border-color backdrop-blur-md py-3"
+    : "bg-white dark:bg-background border-b border-border-color py-4";
 
   return (
     <>
@@ -63,16 +54,14 @@ export const Navbar: React.FC = () => {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 group">
-              <div className="p-2 bg-primary/10 dark:bg-primary-accent/10 rounded-lg group-hover:bg-primary/20 dark:group-hover:bg-primary-accent/20 smooth-transition">
-                <HeartPulse className="w-6 h-6 text-primary dark:text-primary-accent" />
+              <div className="relative w-10 h-10 rounded-full overflow-hidden bg-white shrink-0 shadow-sm">
+                <Image src="/images/hospital-logo.png" alt="Niral Ortho Care logo" fill sizes="40px" className="object-cover" priority />
               </div>
               <div className="flex flex-col">
                 <span className="text-lg font-bold tracking-tight text-primary dark:text-primary-accent leading-none">
                   NIRAL
                 </span>
-                <span className={`text-xs font-semibold tracking-widest uppercase mt-0.5 leading-none transition-colors ${
-                  isTopHome ? "text-zinc-400" : "text-text-secondary"
-                }`}>
+                <span className="text-xs font-semibold tracking-widest uppercase mt-0.5 leading-none transition-colors text-text-secondary">
                   ORTHO CARE
                 </span>
               </div>
@@ -89,9 +78,7 @@ export const Navbar: React.FC = () => {
                     className={`relative text-sm font-medium transition-colors py-2 ${
                       isActive 
                         ? "text-primary dark:text-primary-accent" 
-                        : isTopHome
-                          ? "text-zinc-300 hover:text-white"
-                          : "text-text-secondary hover:text-primary dark:hover:text-primary-accent"
+                        : "text-text-secondary hover:text-primary dark:hover:text-primary-accent"
                     }`}
                   >
                     {link.name}
@@ -108,11 +95,7 @@ export const Navbar: React.FC = () => {
               {/* Language Selector */}
               <button
                 onClick={() => setLanguage(language === "en" ? "ta" : "en")}
-                className={`p-2 rounded-lg smooth-transition flex items-center gap-1.5 text-xs font-semibold ${
-                  isTopHome
-                    ? "text-zinc-300 hover:text-white hover:bg-white/10"
-                    : "text-text-secondary hover:text-primary dark:hover:text-primary-accent hover:bg-bg-secondary dark:hover:bg-primary-light/10"
-                }`}
+                className="p-2 rounded-lg smooth-transition flex items-center gap-1.5 text-xs font-semibold text-text-secondary hover:text-primary dark:hover:text-primary-accent hover:bg-bg-secondary dark:hover:bg-primary-light/10"
                 aria-label="Toggle language"
               >
                 <Globe className="w-4 h-4" />
@@ -122,11 +105,7 @@ export const Navbar: React.FC = () => {
               {/* Theme Toggle */}
               <button
                 onClick={toggleTheme}
-                className={`p-2 rounded-lg smooth-transition ${
-                  isTopHome
-                    ? "text-zinc-300 hover:text-white hover:bg-white/10"
-                    : "text-text-secondary hover:text-primary dark:hover:text-primary-accent hover:bg-bg-secondary dark:hover:bg-primary-light/10"
-                }`}
+                className="p-2 rounded-lg smooth-transition text-text-secondary hover:text-primary dark:hover:text-primary-accent hover:bg-bg-secondary dark:hover:bg-primary-light/10"
                 aria-label="Toggle theme"
               >
                 {theme === "light" ? (
@@ -139,20 +118,16 @@ export const Navbar: React.FC = () => {
               {/* Phone Link (Mockup) */}
               <a
                 href="tel:+911234567890"
-                className={`flex items-center gap-2 text-xs font-bold px-4 py-2.5 rounded-lg border transition-colors ${
-                  isTopHome
-                    ? "border-white/20 text-white hover:bg-white/10 hover:border-white"
-                    : "border-border-color text-foreground hover:bg-bg-secondary dark:hover:bg-card-bg"
-                }`}
+                className="flex items-center gap-2 text-xs font-bold px-4 py-2.5 rounded-lg border border-border-color text-foreground hover:bg-bg-secondary dark:hover:bg-card-bg transition-colors"
               >
-                <Phone className="w-3.5 h-3.5 text-[#19A974]" />
+                <Phone className="w-3.5 h-3.5 text-[#3454D1]" />
                 <span>+91 12345 67890</span>
               </a>
 
               {/* CTA */}
               <Link
                 href="/appointment"
-                className="bg-primary hover:bg-[#076B4A] text-white text-xs font-bold px-5 py-2.5 rounded-lg shadow-sm hover:shadow-md transition-colors flex items-center gap-2"
+                className="bg-primary hover:bg-[#0A1F7A] text-white text-xs font-bold px-5 py-2.5 rounded-lg shadow-sm hover:shadow-md transition-colors flex items-center gap-2"
               >
                 <Calendar className="w-4 h-4" />
                 <span>{t.nav.book}</span>
@@ -164,18 +139,14 @@ export const Navbar: React.FC = () => {
               {/* Quick switches for Mobile */}
               <button
                 onClick={() => setLanguage(language === "en" ? "ta" : "en")}
-                className={`p-1.5 rounded-lg text-xs font-bold ${
-                  isTopHome ? "text-zinc-300 hover:text-white" : "text-text-secondary"
-                }`}
+                className="p-1.5 rounded-lg text-xs font-bold text-text-secondary"
               >
                 {language === "en" ? "தமிழ்" : "EN"}
               </button>
 
               <button
                 onClick={toggleTheme}
-                className={`p-2 rounded-lg ${
-                  isTopHome ? "text-zinc-300 hover:text-white" : "text-text-secondary"
-                }`}
+                className="p-2 rounded-lg text-text-secondary"
                 aria-label="Toggle theme"
               >
                 {theme === "light" ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
@@ -183,11 +154,7 @@ export const Navbar: React.FC = () => {
 
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className={`p-2 rounded-lg ${
-                  isTopHome
-                    ? "text-white hover:bg-white/10"
-                    : "text-text-secondary hover:bg-bg-secondary dark:hover:bg-primary-light/10"
-                }`}
+                className="p-2 rounded-lg text-text-secondary hover:bg-bg-secondary dark:hover:bg-primary-light/10"
                 aria-label="Toggle menu"
               >
                 {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -213,7 +180,9 @@ export const Navbar: React.FC = () => {
       >
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-2">
-            <HeartPulse className="w-6 h-6 text-primary" />
+            <div className="relative w-8 h-8 rounded-full overflow-hidden bg-white shrink-0 shadow-sm">
+              <Image src="/images/hospital-logo.png" alt="Niral Ortho Care logo" fill sizes="32px" className="object-cover" />
+            </div>
             <span className="font-bold text-primary dark:text-primary-accent">NIRAL ORTHO</span>
           </div>
           <button
