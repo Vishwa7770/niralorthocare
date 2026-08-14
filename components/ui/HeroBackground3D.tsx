@@ -34,7 +34,7 @@ const ImageWaveShader = {
       vec4 modelPosition = modelMatrix * vec4(position, 1.0);
       
       // Subtly wave the image vertices for 3D liquid texture effect
-      float elevation = sin(uv.x * 4.0 + uTime * 0.4) * cos(uv.y * 4.0 + uTime * 0.4) * 0.05;
+      float elevation = sin(uv.x * 4.0 + uTime * 0.4) * cos(uv.y * 4.0 + uTime * 0.4) * 0.015;
       
       modelPosition.z += elevation;
       
@@ -43,7 +43,7 @@ const ImageWaveShader = {
       modelPosition.y += uMouse.y * 0.06;
       
       // Scroll Parallax
-      modelPosition.y -= uScroll * 0.0008;
+      modelPosition.y -= uScroll * 0.0005;
 
       vElevation = elevation;
 
@@ -165,14 +165,14 @@ export const HeroBackground3D: React.FC = () => {
 
   // Static Fallback CSS Layout
   const staticFallback = (
-    <div className="absolute inset-0 bg-[#060B1D] pointer-events-none z-0 overflow-hidden">
+    <div className="absolute inset-0 bg-background pointer-events-none z-0 overflow-hidden">
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
         style={{
           backgroundImage: "url('/images/hero-bg.jpg')"
         }}
       />
-      <div className="absolute inset-0 bg-[#142DA6] mix-blend-color opacity-60" />
+      <div className="absolute inset-0 bg-primary/10 mix-blend-color pointer-events-none" />
     </div>
   );
 
@@ -185,23 +185,23 @@ export const HeroBackground3D: React.FC = () => {
   }
 
   return (
-    <div className="absolute inset-0 w-full h-full bg-[#060B1D] overflow-hidden pointer-events-none z-0">
+    <div className="absolute inset-0 w-full h-full bg-background overflow-hidden pointer-events-none z-0">
       <Suspense fallback={staticFallback}>
         <Canvas
           camera={{ position: [0, 0, 1.5], fov: 60 }}
           dpr={[1, 1.2]}
           gl={{ antialias: true, alpha: true }}
-          className="w-full h-full"
+          className="w-full h-full opacity-40 dark:opacity-20"
         >
           <ImagePlane reducedMotion={reducedMotion} />
         </Canvas>
       </Suspense>
 
-      {/* Brand color-shift wash: pulls the source image's teal cast toward the logo's navy blue */}
-      <div className="absolute inset-0 bg-[#142DA6] mix-blend-color opacity-60 pointer-events-none z-[5]" />
+      {/* Brand color-shift wash: subtle medical blue wash */}
+      <div className="absolute inset-0 bg-primary/10 mix-blend-color pointer-events-none z-[5]" />
 
       {/* Vignette overlay */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,#04060F_95%)] pointer-events-none z-10" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_40%,var(--background)_95%)] pointer-events-none z-10" />
     </div>
   );
 };

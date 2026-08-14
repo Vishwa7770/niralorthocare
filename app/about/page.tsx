@@ -33,7 +33,7 @@ export default function AboutPage() {
               <div className="absolute -inset-4 bg-primary/10 rounded-2xl -rotate-2 pointer-events-none" />
               <div className="relative aspect-[3/4] rounded-xl overflow-hidden shadow-md border border-border-color">
                 <Image
-                  src="/images/doctor-portrait.jpg"
+                  src="/images/doctor-portrait-v4.jpg"
                   alt="Dr. V.D.N. Madhivanan - M.B.B.S., M.S. (Ortho)"
                   fill
                   sizes="(max-width: 1024px) 90vw, 40vw"

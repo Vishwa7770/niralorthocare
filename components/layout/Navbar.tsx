@@ -39,6 +39,7 @@ export const Navbar: React.FC = () => {
     { name: t.nav.home, path: "/" },
     { name: t.nav.about, path: "/about" },
     { name: t.nav.treatments, path: "/treatments" },
+    { name: language === "en" ? "Facilities" : "வசதிகள்", path: "/facilities" },
     { name: t.nav.contact, path: "/contact" }
   ];
 
@@ -68,14 +69,14 @@ export const Navbar: React.FC = () => {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-6">
+            <nav className="hidden lg:flex items-center gap-4 xl:gap-6">
               {navLinks.map((link) => {
                 const isActive = pathname === link.path;
                 return (
                   <Link
                     key={link.path}
                     href={link.path}
-                    className={`relative text-sm font-medium transition-colors py-2 ${
+                    className={`relative text-sm font-medium transition-colors py-2 whitespace-nowrap ${
                       isActive 
                         ? "text-primary dark:text-primary-accent" 
                         : "text-text-secondary hover:text-primary dark:hover:text-primary-accent"
@@ -91,7 +92,7 @@ export const Navbar: React.FC = () => {
             </nav>
 
             {/* Actions: Theme, Lang, Appointment */}
-            <div className="hidden lg:flex items-center gap-4">
+            <div className="hidden lg:flex items-center gap-2 xl:gap-4">
               {/* Language Selector */}
               <button
                 onClick={() => setLanguage(language === "en" ? "ta" : "en")}
@@ -115,19 +116,10 @@ export const Navbar: React.FC = () => {
                 )}
               </button>
 
-              {/* Phone Link (Mockup) */}
-              <a
-                href="tel:+911234567890"
-                className="flex items-center gap-2 text-xs font-bold px-4 py-2.5 rounded-lg border border-border-color text-foreground hover:bg-bg-secondary dark:hover:bg-card-bg transition-colors"
-              >
-                <Phone className="w-3.5 h-3.5 text-[#3454D1]" />
-                <span>+91 12345 67890</span>
-              </a>
-
               {/* CTA */}
               <Link
                 href="/appointment"
-                className="bg-primary hover:bg-[#0A1F7A] text-white text-xs font-bold px-5 py-2.5 rounded-lg shadow-sm hover:shadow-md transition-colors flex items-center gap-2"
+                className="bg-primary hover:bg-primary-dark text-white text-xs font-bold px-6 py-2.5 rounded-full shadow-sm hover:shadow-md transition-colors flex items-center gap-2"
               >
                 <Calendar className="w-4 h-4" />
                 <span>{t.nav.book}</span>
@@ -215,7 +207,7 @@ export const Navbar: React.FC = () => {
           <div className="border-t border-border-color my-4 pt-4">
             <Link
               href="/appointment"
-              className="w-full inline-flex items-center justify-center bg-primary hover:bg-primary-dark text-white font-semibold py-3 rounded-lg text-center transition-colors shadow-sm"
+              className="w-full inline-flex items-center justify-center bg-primary hover:bg-primary-dark text-white font-semibold py-3 rounded-full text-center transition-colors shadow-sm"
             >
               {t.nav.book}
             </Link>

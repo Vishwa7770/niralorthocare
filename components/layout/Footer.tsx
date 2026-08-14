@@ -15,7 +15,7 @@ export const Footer: React.FC = () => {
   const footerTreatments = treatmentsData[language] || [];
 
   return (
-    <footer className="bg-[#0A1F7A] text-white pt-16 pb-24 md:pb-16 transition-colors duration-300">
+    <footer className="bg-[#0F1E36] dark:bg-[#090D16] text-white pt-16 pb-24 md:pb-16 border-t border-zinc-100 dark:border-zinc-800/80 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Logo & Intro */}
@@ -58,7 +58,7 @@ export const Footer: React.FC = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-sm font-bold text-[#3454D1] uppercase tracking-wider mb-4">
+            <h3 className="text-sm font-bold text-white uppercase tracking-wider mb-4">
               {t.footer.quickLinks}
             </h3>
             <ul className="space-y-2.5">
@@ -87,7 +87,7 @@ export const Footer: React.FC = () => {
 
           {/* Treatments Links */}
           <div>
-            <h3 className="text-sm font-bold text-[#3454D1] uppercase tracking-wider mb-4">
+            <h3 className="text-sm font-bold text-white uppercase tracking-wider mb-4">
               {t.footer.treatments}
             </h3>
             <ul className="space-y-2.5">
@@ -100,8 +100,8 @@ export const Footer: React.FC = () => {
               ))}
               {footerTreatments.length > 5 && (
                 <li>
-                  <Link href="/treatments" className="text-sm text-[#3454D1] font-semibold hover:underline">
-                    View All Treatments
+                  <Link href="/treatments" className="text-sm text-primary hover:text-primary-dark font-semibold hover:underline">
+                    {language === "en" ? "View All Treatments" : "அனைத்து சிகிச்சைகளையும் காண்க"}
                   </Link>
                 </li>
               )}
@@ -110,7 +110,7 @@ export const Footer: React.FC = () => {
 
           {/* Contact Placeholders */}
           <div>
-            <h3 className="text-sm font-bold text-[#3454D1] uppercase tracking-wider mb-4">
+            <h3 className="text-sm font-bold text-white uppercase tracking-wider mb-4">
               {t.footer.contactInfo}
             </h3>
             <ul className="space-y-3">

@@ -23,7 +23,7 @@ interface FormErrors {
 }
 
 export default function AppointmentPage() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   
   const [fields, setFields] = useState<FormFields>({
     fullName: "",
@@ -184,7 +184,7 @@ export default function AppointmentPage() {
                 onClick={() => setStatus("idle")}
                 className="mt-6 px-6 py-2.5 bg-primary text-white font-bold rounded-lg hover:bg-primary-dark transition-all text-sm"
               >
-                Book Another Appointment
+                {language === "en" ? "Book Another Appointment" : "மறுபடியும் முன்பதிவு செய்ய"}
               </button>
             </div>
           )}
@@ -202,7 +202,7 @@ export default function AppointmentPage() {
                 onClick={() => setStatus("idle")}
                 className="text-xs font-bold underline hover:text-red-600 block mt-2"
               >
-                Try Again
+                {language === "en" ? "Try Again" : "மீண்டும் முயற்சிக்கவும்"}
               </button>
             </div>
           )}
@@ -333,9 +333,9 @@ export default function AppointmentPage() {
                     }`}
                     disabled={status === "loading"}
                   >
-                    <option value="">-- Select Time Slot --</option>
-                    <option value="morning">Morning (10:00 AM - 01:00 PM)</option>
-                    <option value="evening">Evening (05:00 PM - 08:00 PM)</option>
+                    <option value="">{language === "en" ? "-- Select Time Slot --" : "-- நேரத்தைத் தேர்ந்தெடுக்கவும் --"}</option>
+                    <option value="morning">{language === "en" ? "Morning (10:00 AM - 01:00 PM)" : "காலை (10:00 AM - 01:00 PM)"}</option>
+                    <option value="evening">{language === "en" ? "Evening (05:00 PM - 08:00 PM)" : "மாலை (05:00 PM - 08:00 PM)"}</option>
                   </select>
                   {errors.timeSlot && (
                     <p className="text-xs text-red-500 font-semibold">{errors.timeSlot}</p>
@@ -380,7 +380,9 @@ export default function AppointmentPage() {
               <div className="border-t border-border-color pt-4 flex gap-2.5 items-start">
                 <ShieldAlert className="w-4.5 h-4.5 text-text-secondary shrink-0 mt-0.5" />
                 <p className="text-[10px] text-text-secondary leading-normal">
-                  Important: Online requests represent a slot request, NOT a guaranteed final confirmation. Niral Ortho Care administration staff will contact you via your phone number to coordinate doctor availability and finalize booking.
+                  {language === "en" 
+                    ? "Important: Online requests represent a slot request, NOT a guaranteed final confirmation. Niral Ortho Care administration staff will contact you via your phone number to coordinate doctor availability and finalize booking."
+                    : "முக்கியம்: ஆன்லைன் முன்பதிவு கோரிக்கைகள் ஒரு நேரக் கோரிக்கை மட்டுமே, இறுதி உறுதிப்படுத்தல் அல்ல. மருத்துவர் இருப்பு மற்றும் முன்பதிவை இறுதி செய்ய எங்கள் ஊழியர்கள் உங்களைத் தொலைபேசி மூலம் தொடர்புகொள்வார்கள்."}
                 </p>
               </div>
 

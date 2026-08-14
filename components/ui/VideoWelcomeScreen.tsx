@@ -93,7 +93,7 @@ export const VideoWelcomeScreen: React.FC<VideoWelcomeScreenProps> = ({ onComple
         >
           <span className="text-xs font-bold tracking-widest text-zinc-400 uppercase">Welcome to</span>
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
-            NIRAL <span className="text-[#142DA6]">ORTHO CARE</span>
+            NIRAL <span className="text-primary">ORTHO CARE</span>
           </h2>
         </motion.div>
       </div>
@@ -153,7 +153,7 @@ export const VideoWelcomeScreen: React.FC<VideoWelcomeScreenProps> = ({ onComple
                   <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-none">
                     NIRAL
                   </h2>
-                  <span className="text-base sm:text-lg font-bold text-[#142DA6] tracking-[0.3em] uppercase mt-1 leading-none">
+                  <span className="text-base sm:text-lg font-bold text-primary tracking-[0.3em] uppercase mt-1 leading-none">
                     ORTHO CARE
                   </span>
                 </motion.div>

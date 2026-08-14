@@ -6,7 +6,7 @@ import { useLanguage } from "@/components/ui/LanguageContext";
 import Link from "next/link";
 
 export default function ContactPage() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   // Placeholder actions (to be verified by the client)
   const phoneTel = "tel:0000000000";
@@ -123,7 +123,7 @@ export default function ContactPage() {
                 className="flex flex-col items-center justify-center p-4 border border-border-color bg-bg-secondary hover:bg-white dark:bg-card-bg dark:hover:bg-background text-foreground rounded-xl text-center shadow-sm smooth-transition gap-2"
               >
                 <Calendar className="w-5 h-5 text-primary" />
-                <span className="text-xs font-bold">Book Slot</span>
+                <span className="text-xs font-bold">{language === "en" ? "Book Slot" : "முன்பதிவு செய்ய"}</span>
               </Link>
             </div>
 
@@ -139,7 +139,7 @@ export default function ContactPage() {
               </div>
               
               <div className="relative w-full aspect-video bg-gradient-to-br from-primary-light to-bg-secondary dark:from-primary-light/10 dark:to-bg-secondary/20 flex flex-col items-center justify-center p-6 text-center select-none">
-                <div className="absolute inset-0 z-0 opacity-15 pointer-events-none bg-[radial-gradient(#142DA6_1px,transparent_1px)] [background-size:16px_16px]" />
+                <div className="absolute inset-0 z-0 opacity-15 pointer-events-none bg-[radial-gradient(#0E0095_1px,transparent_1px)] [background-size:16px_16px]" />
                 
                 <div className="relative z-10 space-y-4">
                   <div className="p-3 bg-white dark:bg-background rounded-full shadow-md w-fit mx-auto border border-border-color">

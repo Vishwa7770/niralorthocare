@@ -50,7 +50,7 @@ const StylizedJointModel: React.FC<{ reducedMotion: boolean }> = ({ reducedMotio
       <mesh position={[0, 0.25, 0]}>
         <sphereGeometry args={[0.38, 16, 16]} />
         <meshPhysicalMaterial
-          color="#142DA6"
+          color="#0E0095"
           roughness={0.2}
           metalness={0.3}
           clearcoat={0.5}
@@ -61,7 +61,7 @@ const StylizedJointModel: React.FC<{ reducedMotion: boolean }> = ({ reducedMotio
       <mesh position={[0, 0, 0]}>
         <sphereGeometry args={[0.25, 16, 16]} />
         <meshBasicMaterial
-          color="#3454D1"
+          color="#2563EB"
         />
       </mesh>
 
@@ -69,7 +69,7 @@ const StylizedJointModel: React.FC<{ reducedMotion: boolean }> = ({ reducedMotio
       <mesh position={[0, -0.25, 0]}>
         <sphereGeometry args={[0.38, 16, 16]} />
         <meshPhysicalMaterial
-          color="#142DA6"
+          color="#0E0095"
           roughness={0.2}
           metalness={0.3}
           clearcoat={0.5}
@@ -92,8 +92,8 @@ const StylizedJointModel: React.FC<{ reducedMotion: boolean }> = ({ reducedMotio
       <mesh position={[0, 0, 0]} rotation={[0.4, 0.2, 0.5]}>
         <torusGeometry args={[0.46, 0.06, 8, 24]} />
         <meshStandardMaterial
-          color="#3454D1"
-          emissive="#3454D1"
+          color="#2563EB"
+          emissive="#2563EB"
           emissiveIntensity={0.6}
           roughness={0.2}
         />
@@ -102,8 +102,8 @@ const StylizedJointModel: React.FC<{ reducedMotion: boolean }> = ({ reducedMotio
       <mesh position={[0, 0, 0]} rotation={[-0.4, -0.2, -0.5]}>
         <torusGeometry args={[0.46, 0.06, 8, 24]} />
         <meshStandardMaterial
-          color="#3454D1"
-          emissive="#142DA6"
+          color="#2563EB"
+          emissive="#0E0095"
           emissiveIntensity={0.5}
           roughness={0.2}
         />
@@ -113,7 +113,7 @@ const StylizedJointModel: React.FC<{ reducedMotion: boolean }> = ({ reducedMotio
       <mesh position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]}>
         <torusGeometry args={[1.1, 0.015, 4, 32]} />
         <meshBasicMaterial
-          color="#0A1F7A"
+          color="#0A0066"
           transparent
           opacity={0.35}
           wireframe
@@ -123,7 +123,7 @@ const StylizedJointModel: React.FC<{ reducedMotion: boolean }> = ({ reducedMotio
       <mesh position={[0, 0, 0]} rotation={[Math.PI / 4, Math.PI / 4, 0]}>
         <torusGeometry args={[1.3, 0.01, 4, 32]} />
         <meshBasicMaterial
-          color="#3454D1"
+          color="#2563EB"
           transparent
           opacity={0.2}
           wireframe
@@ -176,7 +176,7 @@ export const JointVisual3D: React.FC = () => {
     <div className="w-full aspect-square relative select-none rounded-2xl overflow-hidden bg-gradient-to-br from-primary-light/10 to-transparent dark:from-primary-light/5 dark:to-transparent border border-border-color/30">
       
       {/* Subtle Grid backdrop overlay */}
-      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#142DA6_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
+      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#0E0095_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
 
       <Suspense fallback={<JointVisualFallback />}>
         <Canvas
@@ -192,7 +192,7 @@ export const JointVisual3D: React.FC = () => {
           <directionalLight position={[-5, -5, -2]} intensity={0.5} color="#E9EDFB" />
           
           {/* Internal joint point glow */}
-          <pointLight position={[0, 0, 0]} intensity={1.2} distance={2.5} color="#3454D1" />
+          <pointLight position={[0, 0, 0]} intensity={1.2} distance={2.5} color="#2563EB" />
           
           {/* Stylized Joint Model */}
           <StylizedJointModel reducedMotion={reducedMotion} />
@@ -203,7 +203,7 @@ export const JointVisual3D: React.FC = () => {
             scale={2.5}
             size={2}
             speed={reducedMotion ? 0 : 0.4}
-            color="#3454D1"
+            color="#2563EB"
             opacity={0.6}
           />
 

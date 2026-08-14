@@ -2,30 +2,30 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171B26;
-  --text-secondary: #626A7A;
-  --primary: #142DA6;
-  --primary-dark: #0A1F7A;
-  --primary-accent: #3454D1;
-  --primary-light: #E9EDFB;
-  --bg-secondary: #F5F7FC;
-  --border-color: #E2E6F0;
+  --foreground: #101827; /* Professional charcoal for high readability and medical cleanliness */
+  --text-secondary: #4B5563; /* Neutral gray secondary text */
+  --primary: #0E0095; /* Logo Blue */
+  --primary-dark: #0A0066; /* Darker blue for hover/active states */
+  --primary-accent: #2563EB; /* Vibrant accent blue */
+  --primary-light: #F0F4FF; /* Very light blue for subtle backgrounds */
+  --bg-secondary: #F8FAFC; /* Clean off-white surface background */
+  --border-color: #E2E8F0; /* Clean borders */
   --card-bg: #ffffff;
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
 }
 
 .dark {
-  --background: #0A0E1A;
-  --foreground: #E9EDFB;
-  --text-secondary: #8E96AC;
-  --primary: #3454D1;
-  --primary-dark: #142DA6;
-  --primary-accent: #6C86FF;
-  --primary-light: #161C3D;
-  --bg-secondary: #10142A;
-  --border-color: #1E2544;
-  --card-bg: #10142A;
+  --background: #07111F; /* Deep navy / blue-black */
+  --foreground: #ECF2F6; /* Near-white main text */
+  --text-secondary: #94A3B8; /* Muted gray-blue for secondary text */
+  --primary: #2D58E6; /* Contrast-optimized logo blue for dark theme */
+  --primary-dark: #1E40AF;
+  --primary-accent: #60A5FA;
+  --primary-light: #0D1B2A; /* Lighter dark navy background for cards/sections */
+  --bg-secondary: #0A1626; /* Darker navy secondary background */
+  --border-color: rgba(59, 130, 246, 0.15); /* Subtle transparent blue/gray border */
+  --card-bg: #0D1B2A; /* Standard card background */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
 }
@@ -41,8 +41,35 @@
   --color-bg-secondary: var(--bg-secondary);
   --color-border-color: var(--border-color);
   --color-card-bg: var(--card-bg);
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist-sans), var(--font-noto-tamil), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Tamil typography adjustments for better vertical breathing room */
+html[lang="ta"] body {
+  line-height: 1.65;
+  letter-spacing: 0.01em;
+}
+
+html[lang="ta"] h1,
+html[lang="ta"] h2,
+html[lang="ta"] h3,
+html[lang="ta"] h4,
+html[lang="ta"] h5,
+html[lang="ta"] h6 {
+  line-height: 1.35;
+  letter-spacing: normal;
+}
+
+html[lang="ta"] p,
+html[lang="ta"] span:not(.font-mono),
+html[lang="ta"] li,
+html[lang="ta"] a,
+html[lang="ta"] button,
+html[lang="ta"] label,
+html[lang="ta"] input,
+html[lang="ta"] textarea {
+  line-height: 1.7;
 }
 
 body {

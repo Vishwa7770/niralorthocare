@@ -88,6 +88,29 @@ export interface TranslationSchema {
     testimonials: string;
     facilities: string;
   };
+  quickActions: {
+    appointment: string;
+    treatments: string;
+    facilities: string;
+    directions: string;
+  };
+  doctorMessage: {
+    subtitle: string;
+    welcome: string;
+    quote: string;
+    founderTitle: string;
+  };
+  videoShowcase: {
+    subtitle: string;
+    title: string;
+    desc: string;
+    card1Title: string;
+    card1Desc: string;
+    card2Title: string;
+    card2Desc: string;
+    card3Title: string;
+    card3Desc: string;
+  };
 }
 
 export const translations: Record<'en' | 'ta', TranslationSchema> = {
@@ -173,13 +196,36 @@ export const translations: Record<'en' | 'ta', TranslationSchema> = {
       rights: "All Rights Reserved."
     },
     placeholders: {
-      address: "[Hospital Address - Content Pending Client Verification]",
-      phone: "[Phone Number - Content Pending Client Verification]",
-      email: "[Email Address - Content Pending Client Verification]",
-      timings: "[Consultation Timings - Content Pending Client Verification]",
+      address: "No. 20-A, R.R.Sethupathy Nagar, Ramanathapuram",
+      phone: "04567 358811 / Cell: 82708 82288",
+      email: "niralorthocare@gmail.com",
+      timings: "Mon - Sat: 10:00 AM - 01:00 PM & 05:00 PM - 08:00 PM",
       experience: "[Doctor Experience - Content Pending Client Verification]",
       testimonials: "[Verified patient testimonial - Content Pending Client Verification]",
       facilities: "[Facilities Content - Content Pending Client Verification]"
+    },
+    quickActions: {
+      appointment: "Book Appointment",
+      treatments: "Explore Treatments",
+      facilities: "Clinic Tour",
+      directions: "Get Directions"
+    },
+    doctorMessage: {
+      subtitle: "CHIEF SURGEON'S MESSAGE",
+      welcome: "Welcome to Niral Ortho Care",
+      quote: "Our commitment is to provide state-of-the-art orthopedic care with a human touch. Every patient's journey to recovery is unique, and we tailor our treatments to help them reclaim their active lives.",
+      founderTitle: "Founder & Chief Orthopedic Surgeon"
+    },
+    videoShowcase: {
+      subtitle: "Watch & Learn",
+      title: "Clinic Tour & Educational Videos",
+      desc: "Learn more about our orthopedic expertise, clinical environment, and patient recovery processes.",
+      card1Title: "Introduction to Niral Ortho Care",
+      card1Desc: "A brief overview of our clinic and patient philosophy.",
+      card2Title: "Orthopedic Diagnostic Tour",
+      card2Desc: "Inside our modern examination and diagnostic facilities.",
+      card3Title: "Post-Operative Recovery Guidance",
+      card3Desc: "Essential physical therapy guidance by orthopedic specialists."
     }
   },
   ta: {
@@ -264,13 +310,36 @@ export const translations: Record<'en' | 'ta', TranslationSchema> = {
       rights: "அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை."
     },
     placeholders: {
-      address: "[மருத்துவமனை முகவரி - கிளையன்ட் சரிபார்ப்பு நிலுவையில் உள்ளது]",
-      phone: "[தொலைபேசி எண் - கிளையன்ட் சரிபார்ப்பு நிலுவையில் உள்ளது]",
-      email: "[மின்னஞ்சல் முகவரி - கிளையன்ட் சரிபார்ப்பு நிலுவையில் உள்ளது]",
-      timings: "[ஆலோசனை நேரங்கள் - கிளையன்ட் சரிபார்ப்பு நிலுவையில் உள்ளது]",
+      address: "எண். 20-A, ஆர்.ஆர்.சேதுபதி நகர், இராமநாதபுரம்",
+      phone: "04567 358811 / Cell: 82708 82288",
+      email: "niralorthocare@gmail.com",
+      timings: "திங்கள் - சனி: காலை 10:00 - மதியம் 01:00 & மாலை 05:00 - இரவு 08:00",
       experience: "[மருத்துவர் அனுபவம் - கிளையன்ட் சரிபார்ப்பு நிலுவையில் உள்ளது]",
       testimonials: "[சரிபார்க்கப்பட்ட நோயாளியின் கருத்து - கிளையன்ட் சரிபார்ப்பு நிலுவையில் உள்ளது]",
       facilities: "[சிகிச்சை வசதிகள் - கிளையன்ட் சரிபார்ப்பு நிலுவையில் உள்ளது]"
+    },
+    quickActions: {
+      appointment: "முன்பதிவு செய்ய",
+      treatments: "சிகிச்சைகள் ஆராய",
+      facilities: "மருத்துவமனை சுற்றுப்பயணம்",
+      directions: "இருப்பிடம் பெற"
+    },
+    doctorMessage: {
+      subtitle: "தலைமை அறுவை சிகிச்சை நிபுணரின் செய்தி",
+      welcome: "நிரல் எலும்பியல் மையத்திற்கு வரவேற்கிறோம்",
+      quote: "எங்கள் அர்ப்பணிப்பு என்னவென்றால், அதிநவீன எலும்பியல் சிகிச்சையை மனித நேயத்துடன் வழங்குவதாகும். குணமடைவதை நோக்கிய ஒவ்வொரு நோயாளியின் பயணமும் தனித்துவமானது, மேலும் அவர்கள் தங்களின் சுறுசுறுப்பான வாழ்க்கையை மீண்டும் பெற எங்கள் சிகிச்சைகளை நாங்கள் தனிப்பயனாக்குகிறோம்.",
+      founderTitle: "நிறுவனர் & தலைமை எலும்பியல் அறுவை சிகிச்சை நிபுணர்"
+    },
+    videoShowcase: {
+      subtitle: "கண்டு அறிந்து கொள்ளுங்கள்",
+      title: "சுற்றுப்பயணம் மற்றும் கல்வி வீடியோக்கள்",
+      desc: "எங்கள் எலும்பியல் நிபுணத்துவம், சிகிச்சை சூழல் மற்றும் நோயாளிகளின் குணமடைதல் செயல்முறைகள் பற்றி மேலும் தெரிந்து கொள்ளுங்கள்.",
+      card1Title: "நிரல் எலும்பியல் கவனிப்பு அறிமுகம்",
+      card1Desc: "எங்கள் மருத்துவமனை மற்றும் சிகிச்சை தத்துவம் பற்றிய ஒரு சிறு கண்ணோட்டம்.",
+      card2Title: "எலும்பியல் கண்டறிதல் சுற்றுப்பயணம்",
+      card2Desc: "எங்கள் நவீன பரிசோதனை மற்றும் கண்டறியும் வசதிகளுக்குள்.",
+      card3Title: "அறுவை சிகிச்சைக்குப் பிந்தைய மீட்பு வழிகாட்டுதல்",
+      card3Desc: "எலும்பியல் நிபுணர்களின் அத்தியாவசிய உடற்பயிற்சி சிகிச்சை வழிகாட்டுதல்."
     }
   }
 };
