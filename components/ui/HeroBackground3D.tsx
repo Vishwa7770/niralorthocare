@@ -20,7 +20,7 @@ if (typeof window !== "undefined") {
   };
 }
 
-// Custom shader for liquid wave rendering of the background image
+// Custom shader for liquid wave rendering of the background image with mouse ripple spread
 const ImageWaveShader = {
   vertexShader: `
     uniform float uTime;
@@ -33,14 +33,25 @@ const ImageWaveShader = {
       vUv = uv;
       vec4 modelPosition = modelMatrix * vec4(position, 1.0);
       
-      // Subtly wave the image vertices for 3D liquid texture effect
-      float elevation = sin(uv.x * 4.0 + uTime * 0.4) * cos(uv.y * 4.0 + uTime * 0.4) * 0.015;
+      // Calculate mouse position mapped to UV coordinates (0 to 1)
+      vec2 mouseUv = vec2(uMouse.x * 0.5 + 0.5, uMouse.y * 0.5 + 0.5);
       
+      // Calculate distance from this vertex UV to mouse UV position
+      float dist = distance(uv, mouseUv);
+      
+      // Subtly wave the image vertices for base 3D liquid texture effect
+      float baseWave = sin(uv.x * 4.0 + uTime * 0.3) * cos(uv.y * 4.0 + uTime * 0.3) * 0.012;
+      
+      // Concentric water ripple/spread animation centered at cursor
+      // Ripple fades out smoothly at 0.5 distance radius
+      float ripple = sin(dist * 18.0 - uTime * 2.0) * 0.022 * smoothstep(0.5, 0.0, dist);
+      
+      float elevation = baseWave + ripple;
       modelPosition.z += elevation;
       
-      // Mouse Parallax
-      modelPosition.x += uMouse.x * 0.06;
-      modelPosition.y += uMouse.y * 0.06;
+      // Mouse Parallax (subtle card translation)
+      modelPosition.x += uMouse.x * 0.05;
+      modelPosition.y += uMouse.y * 0.05;
       
       // Scroll Parallax
       modelPosition.y -= uScroll * 0.0005;
@@ -60,8 +71,8 @@ const ImageWaveShader = {
     void main() {
       vec4 color = texture2D(uTexture, vUv);
       
-      // Apply depth shading to the wave ridges to accentuate 3D effect
-      color.rgb += vElevation * 0.12;
+      // Apply depth shading to the wave ridges to accentuate water ripples 3D look
+      color.rgb += vElevation * 0.16;
       
       gl_FragColor = color;
     }
@@ -122,7 +133,7 @@ const ImagePlane: React.FC<ImagePlaneProps> = ({ reducedMotion }) => {
 
   return (
     <mesh ref={meshRef} scale={[scaleX, scaleY, 1]}>
-      <planeGeometry args={[1, 1, 32, 32]} />
+      <planeGeometry args={[1, 1, 64, 64]} />
       <shaderMaterial
         uniforms={uniforms.current}
         vertexShader={ImageWaveShader.vertexShader}

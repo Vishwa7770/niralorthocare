@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { 
   ArrowRight, 
   Activity, 
@@ -65,6 +65,60 @@ export default function Home() {
   // Video showcase state
   const [isPlayingIntroVideo, setIsPlayingIntroVideo] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Mouse hover Parallax tracking
+  const heroRef = useRef<HTMLDivElement>(null);
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  // Motion values to update styling without triggering React state updates / re-renders
+  const mouseX = useMotionValue(0); // Normalized range [-1, 1]
+  const mouseY = useMotionValue(0); // Normalized range [-1, 1]
+
+  // Spring animations for clean inertia and smooth lag
+  const springConfig = { stiffness: 120, damping: 25, mass: 0.5 };
+  const springX = useSpring(mouseX, springConfig);
+  const springY = useSpring(mouseY, springConfig);
+
+  // Transform spring values to 3D rotation and translation visual parameters
+  const rotateX = useTransform(springY, [-1, 1], [6, -6]);  // rotates X from 6deg to -6deg
+  const rotateY = useTransform(springX, [-1, 1], [-8, 8]);  // rotates Y from -8deg to 8deg
+  const translateX = useTransform(springX, [-1, 1], [-8, 8]); // translates X from -8px to 8px
+  const translateY = useTransform(springY, [-1, 1], [-8, 8]); // translates Y from -8px to 8px
+
+  // Foreground Layer 3 badge translates with a stronger multiplier for layered depth
+  const badgeTranslateX = useTransform(springX, [-1, 1], [-14, 14]);
+  const badgeTranslateY = useTransform(springY, [-1, 1], [-14, 14]);
+
+  useEffect(() => {
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReducedMotion(motionQuery.matches);
+    const handleMotionChange = (e: MediaQueryListEvent) => {
+      setReducedMotion(e.matches);
+    };
+    motionQuery.addEventListener("change", handleMotionChange);
+    return () => motionQuery.removeEventListener("change", handleMotionChange);
+  }, []);
+
+  const handleHeroMouseMove = (e: React.MouseEvent) => {
+    // Disable on mobile/touch screens or reduced motion
+    if (window.matchMedia("(max-width: 1024px)").matches || reducedMotion) {
+      return;
+    }
+    if (!heroRef.current) return;
+    const rect = heroRef.current.getBoundingClientRect();
+    // Normalized position relative to center: ranges from -1 to 1
+    const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    const y = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+    
+    mouseX.set(x);
+    mouseY.set(y);
+  };
+
+  const handleHeroMouseLeave = () => {
+    // Smoothly spring return to default center position
+    mouseX.set(0);
+    mouseY.set(0);
+  };
 
   // Disable scroll while welcome intro is playing
   useEffect(() => {
@@ -158,7 +212,12 @@ export default function Home() {
       </AnimatePresence>
 
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-[92vh] flex items-center justify-center bg-gradient-to-b from-[#F0F4FF] via-[#F8FAFC] to-[#FFFFFF] dark:from-background dark:via-background/95 dark:to-background text-foreground overflow-hidden pt-36 pb-16">
+      <section 
+        ref={heroRef}
+        onMouseMove={handleHeroMouseMove}
+        onMouseLeave={handleHeroMouseLeave}
+        className="relative min-h-[92vh] flex items-center justify-center bg-gradient-to-b from-[#F0F4FF] via-[#F8FAFC] to-[#FFFFFF] dark:from-background dark:via-background/95 dark:to-background text-foreground overflow-hidden pt-36 pb-16"
+      >
         {/* Layer 1: Background image with 3D liquid wave displacement texture rendering */}
         <HeroBackground3D />
 
@@ -256,9 +315,19 @@ export default function Home() {
               className="lg:col-span-5 relative w-full flex flex-col items-center justify-center pt-8 lg:pt-0"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1, transition: { duration: 0.8, ease: "easeOut" as const } }}
+              style={{ transformStyle: "preserve-3d", perspective: 1200 }}
             >
-              {/* High-quality Doctor portrait */}
-              <div className="relative w-full aspect-[4/3] sm:aspect-[1.1] lg:aspect-[0.9] rounded-[40px] overflow-hidden shadow-2xl border-4 border-white/90 dark:border-zinc-800/90 shadow-primary/5 bg-zinc-100 z-10">
+              {/* High-quality Doctor portrait with 3D tilt */}
+              <motion.div 
+                className="relative w-full aspect-[4/3] sm:aspect-[1.1] lg:aspect-[0.9] rounded-[40px] overflow-hidden shadow-2xl border-4 border-white/90 dark:border-zinc-800/90 shadow-primary/5 bg-zinc-100 z-10"
+                style={{
+                  rotateX: reducedMotion ? 0 : rotateX,
+                  rotateY: reducedMotion ? 0 : rotateY,
+                  x: reducedMotion ? 0 : translateX,
+                  y: reducedMotion ? 0 : translateY,
+                  transformStyle: "preserve-3d",
+                }}
+              >
                 <Image
                   src="/images/hero-doctor.jpg"
                   alt="Dr. V.D.N. Madhivanan | Niral Ortho Care"
@@ -267,21 +336,32 @@ export default function Home() {
                   sizes="(max-w-1024px) 100vw, 50vw"
                   priority
                 />
-              </div>
+              </motion.div>
+
+              {/* Floating Layer 3 decorative badge for depth parallax */}
+              <motion.div
+                className="absolute bottom-6 -left-6 bg-white dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-900 p-4 rounded-2xl shadow-xl z-20 hidden sm:flex items-center gap-3 select-none"
+                style={{
+                  x: reducedMotion ? 0 : badgeTranslateX,
+                  y: reducedMotion ? 0 : badgeTranslateY,
+                  transformStyle: "preserve-3d",
+                  translateZ: 60, // pushes badge forward in 3D space
+                }}
+              >
+                <div className="w-10 h-10 rounded-full bg-primary-light dark:bg-primary-light/10 flex items-center justify-center text-primary dark:text-primary-accent shrink-0">
+                  <Stethoscope className="w-5 h-5" />
+                </div>
+                <div className="flex flex-col text-left">
+                  <span className="text-xs font-extrabold text-[#0F1E36] dark:text-white leading-none">
+                    {language === "en" ? "Joint Care Specialist" : "மூட்டு சிகிச்சை நிபுணர்"}
+                  </span>
+                  <span className="text-[10px] font-bold text-text-secondary mt-1">
+                    {language === "en" ? "20+ Years Experience" : "20+ ஆண்டுகள் அனுபவம்"}
+                  </span>
+                </div>
+              </motion.div>
             </motion.div>
           </div>
-        </div>
-
-        {/* Scroll down indicator */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1 opacity-80 pointer-events-none">
-          <div className="w-5 h-8 border-2 border-border-color rounded-full flex justify-center p-1">
-            <motion.div 
-              className="w-1 h-2 bg-primary rounded-full"
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-            />
-          </div>
-          <span className="text-[9px] font-bold tracking-widest uppercase text-text-secondary">Scroll Down</span>
         </div>
       </section>
 
