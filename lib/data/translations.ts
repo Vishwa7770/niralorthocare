@@ -27,6 +27,9 @@ export interface TranslationSchema {
     qualificationsTitle: string;
     expertiseTitle: string;
     learnMore: string;
+    tmcRegister: string;
+    ioaMember: string;
+    tnoaMember: string;
   };
   whyChoose: {
     title: string;
@@ -139,10 +142,13 @@ export const translations: Record<'en' | 'ta', TranslationSchema> = {
       doctorName: "Dr. V.D.N. Madhivanan",
       degree: "M.B.B.S., M.S. (Ortho)",
       role: "Orthopedic Surgeon",
-      bio: "Dr. V.D.N. Madhivanan is a highly trained orthopedic surgeon dedicated to restoring mobility and enhancing the quality of life for his patients. Providing specialized care tailored to individual conditions.",
+      bio: "Dr. V.D.N. Madhivanan is a highly skilled orthopedic surgeon with over two decades of dedicated surgical experience. He specializes in advanced joint preservation, complex trauma reconstructions, arthritic management, and minimally invasive keyhole procedures. Known for his compassionate approach, he focuses on restorative treatments that prioritize patient comfort, mobility, and long-term joint health, helping thousands regain their active lifestyles.",
       qualificationsTitle: "Qualifications",
       expertiseTitle: "Areas of Expertise",
-      learnMore: "Learn More About the Doctor"
+      learnMore: "Learn More About the Doctor",
+      tmcRegister: "Registered with the Tamil Nadu Medical Council (TMC)",
+      ioaMember: "Life Member of the Indian Orthopaedic Association (IOA)",
+      tnoaMember: "Life Member of the Tamil Nadu Orthopaedic Association (TNOA)"
     },
     whyChoose: {
       title: "Why Choose Niral Ortho Care",
@@ -200,7 +206,7 @@ export const translations: Record<'en' | 'ta', TranslationSchema> = {
       phone: "04567 358811 / Cell: 82708 82288",
       email: "niralorthocare@gmail.com",
       timings: "Mon - Sat: 10:00 AM - 01:00 PM & 05:00 PM - 08:00 PM",
-      experience: "[Doctor Experience - Content Pending Client Verification]",
+      experience: "Over 20 Years of Dedicated Orthopedic Surgical Experience",
       testimonials: "[Verified patient testimonial - Content Pending Client Verification]",
       facilities: "[Facilities Content - Content Pending Client Verification]"
     },
@@ -253,10 +259,13 @@ export const translations: Record<'en' | 'ta', TranslationSchema> = {
       doctorName: "Dr. V.D.N. மதிவாணன்",
       degree: "M.B.B.S., M.S. (Ortho)",
       role: "எலும்பியல் அறுவை சிகிச்சை நிபுணர்",
-      bio: "டாக்டர் V.D.N. மதிவாணன் அவர்கள் நோயாளிகளின் இயக்கம் மற்றும் வாழ்க்கைத் தரத்தை மேம்படுத்துவதற்காக அர்ப்பணிக்கப்பட்ட ஒரு சிறந்த எலும்பியல் அறுவை சிகிச்சை நிபுணர் ஆவார். ஒவ்வொரு நோயாளியின் தேவைக்கேற்ப சிகிச்சை வழங்குகிறார்.",
+      bio: "டாக்டர் V.D.N. மதிவாணன் அவர்கள் 20 ஆண்டுகளுக்கும் மேலான அனுபவம் கொண்ட ஒரு சிறந்த மூத்த எலும்பியல் அறுவை சிகிச்சை நிபுணர் ஆவார். அவர் மூட்டு பாதுகாப்பு சிகிச்சைகள், சிக்கலான எலும்பு முறிவு அறுவை சிகிச்சைகள், மூட்டுவலி மேலாண்மை மற்றும் குறைந்த ஊடுருவும் தையல் இல்லா அறுவை சிகிச்சைகளில் நிபுணத்துவம் பெற்றவர். நோயாளிகளின் விரைவான குணமடைதல், இயக்கம் மற்றும் நீண்ட கால மூட்டு ஆரோக்கியத்திற்கு முக்கியத்துவம் அளித்து உயர்தர சிகிச்சை வழங்கி வருகிறார்.",
       qualificationsTitle: "தகுதிகள்",
       expertiseTitle: "சிறப்புத் துறைகள்",
-      learnMore: "மருத்துவர் பற்றி மேலும் அறிய"
+      learnMore: "மருத்துவர் பற்றி மேலும் அறிய",
+      tmcRegister: "தமிழ்நாடு மருத்துவக் கவுன்சிலில் (TMC) பதிவுசெய்யப்பட்டது",
+      ioaMember: "இந்திய எலும்பியல் சங்கத்தின் (IOA) வாழ்நாள் உறுப்பினர்",
+      tnoaMember: "தமிழ்நாடு எலும்பியல் சங்கத்தின் (TNOA) வாழ்நாள் உறுப்பினர்"
     },
     whyChoose: {
       title: "ஏன் நிரல் எலும்பியல் கவனிப்பை தேர்வு செய்ய வேண்டும்?",
@@ -314,7 +323,7 @@ export const translations: Record<'en' | 'ta', TranslationSchema> = {
       phone: "04567 358811 / Cell: 82708 82288",
       email: "niralorthocare@gmail.com",
       timings: "திங்கள் - சனி: காலை 10:00 - மதியம் 01:00 & மாலை 05:00 - இரவு 08:00",
-      experience: "[மருத்துவர் அனுபவம் - கிளையன்ட் சரிபார்ப்பு நிலுவையில் உள்ளது]",
+      experience: "20 ஆண்டுகளுக்கும் மேலான பிரத்யேக எலும்பியல் அறுவை சிகிச்சை அனுபவம்",
       testimonials: "[சரிபார்க்கப்பட்ட நோயாளியின் கருத்து - கிளையன்ட் சரிபார்ப்பு நிலுவையில் உள்ளது]",
       facilities: "[சிகிச்சை வசதிகள் - கிளையன்ட் சரிபார்ப்பு நிலுவையில் உள்ளது]"
     },

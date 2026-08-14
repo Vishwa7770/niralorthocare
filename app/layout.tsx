@@ -6,6 +6,7 @@ import { LanguageProvider } from "@/components/ui/LanguageContext";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { MobileActionBar } from "@/components/layout/MobileActionBar";
+import { CustomCursor } from "@/components/ui/CustomCursor";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -63,6 +64,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-background text-foreground smooth-transition">
         <ThemeProvider>
           <LanguageProvider>
+            <CustomCursor />
             <Navbar />
             <div className="flex-1 flex flex-col">
               {children}

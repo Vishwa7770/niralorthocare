@@ -2,11 +2,11 @@
 
 import React from "react";
 import Image from "next/image";
-import { GraduationCap, ClipboardList, HeartPulse } from "lucide-react";
+import { GraduationCap, ClipboardList, HeartPulse, CheckCircle2 } from "lucide-react";
 import { useLanguage } from "@/components/ui/LanguageContext";
 
 export default function AboutPage() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   return (
     <div className="w-full pt-32 pb-16 sm:pt-36 bg-white dark:bg-background smooth-transition">
@@ -58,13 +58,25 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="border-t border-border-color pt-6">
-              <p className="text-base text-text-secondary leading-relaxed mb-4">
+            <div className="border-t border-border-color pt-6 space-y-4">
+              <p className="text-base text-text-secondary leading-relaxed">
                 {t.doctor.bio}
               </p>
               <p className="text-base text-text-secondary leading-relaxed">
                 Our practice is centered on providing personalized orthopedics. We focus on conservative, non-surgical management when possible, resorting to precise surgical interventions only when they offer the most effective path to recovery.
               </p>
+              
+              {/* Doctor's Motto Quote Card */}
+              <div className="bg-primary-light/40 dark:bg-primary-light/5 border-l-4 border-primary p-5 rounded-r-xl mt-6">
+                <p className="text-sm font-semibold text-text-secondary dark:text-zinc-300 italic leading-relaxed">
+                  {language === "en" 
+                    ? "Our dedication is to provide world-class orthopedics with a compassionate, human touch. Every patient's journey to recovery is unique, and we customize our treatments to help them reclaim their active lives."
+                    : "எங்கள் அர்ப்பணிப்பு என்னவென்றால், அதிநவீன எலும்பியல் சிகிச்சையை மனித நேயத்துடன் வழங்குவதாகும். குணமடைவதை நோக்கிய ஒவ்வொரு நோயாளியின் பயணமும் தனித்துவமானது, தங்களின் சுறுசுறுப்பான வாழ்க்கையை மீண்டும் பெற எங்கள் சிகிச்சைகளை நாங்கள் தனிப்பயனாக்குகிறோம்."}
+                </p>
+                <span className="block text-xs font-bold uppercase tracking-wider text-primary dark:text-primary-accent mt-3">
+                  — Dr. V.D.N. Madhivanan
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -73,80 +85,92 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-12 border-t border-border-color">
           
           {/* Box 1: Qualifications */}
-          <div className="bg-bg-secondary dark:bg-card-bg p-6 rounded-xl border border-border-color flex flex-col">
-            <div className="p-3 bg-primary-light dark:bg-primary-light/10 text-primary dark:text-primary-accent rounded-lg w-fit mb-5">
+          <div className="bg-bg-secondary dark:bg-card-bg p-7 rounded-2xl border border-border-color flex flex-col hover:-translate-y-1 hover:shadow-lg hover:border-primary/20 hover:bg-white dark:hover:bg-zinc-900/40 transition-all duration-300">
+            <div className="p-3.5 bg-primary-light dark:bg-primary-light/10 text-primary dark:text-primary-accent rounded-xl w-fit mb-5">
               <GraduationCap className="w-6 h-6" />
             </div>
-            <h3 className="text-lg font-bold text-foreground mb-3">
+            <h3 className="text-lg font-bold text-foreground mb-4">
               Qualifications & Credentials
             </h3>
-            <ul className="space-y-2 text-sm text-text-secondary leading-relaxed flex-1">
-              <li className="flex gap-2">
-                <span className="text-primary font-bold">•</span>
+            <ul className="space-y-3.5 text-sm text-text-secondary leading-relaxed flex-1">
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                 <span>M.B.B.S. (Bachelor of Medicine, Bachelor of Surgery)</span>
               </li>
-              <li className="flex gap-2">
-                <span className="text-primary font-bold">•</span>
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                 <span>M.S. (Ortho) (Master of Surgery in Orthopedics)</span>
               </li>
-              <li className="flex gap-2">
-                <span className="text-primary font-bold">•</span>
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                 <span>{t.placeholders.experience}</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                <span>{t.doctor.tmcRegister}</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                <span>{t.doctor.ioaMember}</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                <span>{t.doctor.tnoaMember}</span>
               </li>
             </ul>
           </div>
 
           {/* Box 2: Specialties */}
-          <div className="bg-bg-secondary dark:bg-card-bg p-6 rounded-xl border border-border-color flex flex-col">
-            <div className="p-3 bg-primary-light dark:bg-primary-light/10 text-primary dark:text-primary-accent rounded-lg w-fit mb-5">
+          <div className="bg-bg-secondary dark:bg-card-bg p-7 rounded-2xl border border-border-color flex flex-col hover:-translate-y-1 hover:shadow-lg hover:border-primary/20 hover:bg-white dark:hover:bg-zinc-900/40 transition-all duration-300">
+            <div className="p-3.5 bg-primary-light dark:bg-primary-light/10 text-primary dark:text-primary-accent rounded-xl w-fit mb-5">
               <ClipboardList className="w-6 h-6" />
             </div>
-            <h3 className="text-lg font-bold text-foreground mb-3">
+            <h3 className="text-lg font-bold text-foreground mb-4">
               Key Medical Focus
             </h3>
-            <ul className="space-y-2 text-sm text-text-secondary leading-relaxed flex-1">
-              <li className="flex gap-2">
-                <span className="text-primary font-bold">•</span>
+            <ul className="space-y-3.5 text-sm text-text-secondary leading-relaxed flex-1">
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                 <span>Trauma and Fracture Alignment Fixation</span>
               </li>
-              <li className="flex gap-2">
-                <span className="text-primary font-bold">•</span>
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                 <span>Degenerative Arthritis Management</span>
               </li>
-              <li className="flex gap-2">
-                <span className="text-primary font-bold">•</span>
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                 <span>Ligament Repairs & Sports Injury Rehab</span>
               </li>
-              <li className="flex gap-2">
-                <span className="text-primary font-bold">•</span>
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                 <span>Non-surgical Joint Preservation Techniques</span>
               </li>
             </ul>
           </div>
 
           {/* Box 3: Values */}
-          <div className="bg-bg-secondary dark:bg-card-bg p-6 rounded-xl border border-border-color flex flex-col">
-            <div className="p-3 bg-primary-light dark:bg-primary-light/10 text-primary dark:text-primary-accent rounded-lg w-fit mb-5">
+          <div className="bg-bg-secondary dark:bg-card-bg p-7 rounded-2xl border border-border-color flex flex-col hover:-translate-y-1 hover:shadow-lg hover:border-primary/20 hover:bg-white dark:hover:bg-zinc-900/40 transition-all duration-300">
+            <div className="p-3.5 bg-primary-light dark:bg-primary-light/10 text-primary dark:text-primary-accent rounded-xl w-fit mb-5">
               <HeartPulse className="w-6 h-6" />
             </div>
-            <h3 className="text-lg font-bold text-foreground mb-3">
+            <h3 className="text-lg font-bold text-foreground mb-4">
               Clinical Care Ethics
             </h3>
-            <ul className="space-y-2 text-sm text-text-secondary leading-relaxed flex-1">
-              <li className="flex gap-2">
-                <span className="text-primary font-bold">•</span>
+            <ul className="space-y-3.5 text-sm text-text-secondary leading-relaxed flex-1">
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                 <span>Clear patient education during diagnosis</span>
               </li>
-              <li className="flex gap-2">
-                <span className="text-primary font-bold">•</span>
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                 <span>Conservative treatment pathways preferred</span>
               </li>
-              <li className="flex gap-2">
-                <span className="text-primary font-bold">•</span>
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                 <span>Rigorous post-surgical monitoring & rehab</span>
               </li>
-              <li className="flex gap-2">
-                <span className="text-primary font-bold">•</span>
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                 <span>Comfortable, modern clinical environment</span>
               </li>
             </ul>
